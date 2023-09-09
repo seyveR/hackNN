@@ -1,0 +1,147 @@
+body {
+    width: auto;
+    background: #686b6b;
+    margin: 0px;
+    border: 1px solid #343024;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif,Yu Gothic;
+    font-size: 4px;
+    
+}
+
+nav a {
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    color: #CAC3C3;
+    text-decoration: none;
+    
+}
+
+body h1 {
+    text-align: left;
+    display: block;
+    font-size: 2em;
+}
+
+.highlight {
+    background-color: lightgreen;
+}
+
+.green-text {
+    color: green;
+}
+
+main {
+    margin-top: 0px;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-bottom: 100px;
+    padding-left: 1%;
+    padding-right: 1%;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+    color: #CAC3C3;
+    border-radius: 10px; 
+    /* border: #595959 1px solid; */
+    min-height: 70vh;
+    display: flex;
+    background:#ffffff;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+
+
+form {
+    margin: 0;
+}
+aside {     
+    margin-top: 1%;
+    margin-right: 350;
+    float: top;
+    background: #0f5132;
+    width: 99.95%;
+    height: 100px;
+    position: relative;
+    border: #0f5132 1px solid;
+
+}
+
+aside li {
+    list-style: none;
+    
+}
+
+aside img {
+    margin-top: 20px;
+    width: 20%;
+    float: left;
+    position: relative;
+    top: +7px
+    
+}
+
+.nav_block {
+    margin-top: 1.5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 0%;
+  }
+
+.nav_button a:hover{
+    color: #53B9D7;
+}
+
+.nav_button {
+    position: relative;
+	width: 200px;
+    padding-right: 20%;
+    height: 40px;
+	color:#e6e6e6;
+	font-size:20px;
+    text-align: 10px;
+	float:left;
+    margin-top: 9px;
+    margin-left: -60px;
+ }
+
+ .bottom_bar {
+    width: 99.95%;
+    font-size: 20px;
+    float: bottom;
+    background: #000000;
+    color: #e6e6e6;
+    margin-top: 50px;
+    border: #595959 1px solid;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+    position: relative;
+ }
+
+.left_side {
+    float: left;
+    width: 200px;
+    height: 40px;
+    margin-left: 50px;
+    margin-top: -5px;
+}
+
+
+ .right_side {
+    float: right;
+    width: 200px;
+    height: 50px;
+    margin-right: 50px;
+    margin-top: -5px;
+ }
+    
+aside img{
+    width: 100px;
+    float: left;
+    margin-top: -1.4%;
+}
+
+
+
