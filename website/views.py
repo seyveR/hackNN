@@ -272,7 +272,7 @@ X_train_tfidf = tfidf_vectorizer.fit_transform(X_train)
 X_test_tfidf = tfidf_vectorizer.transform(X_test)
 
 
-loaded_model = joblib.load('ridge_model.pkl')
+loaded_model = joblib.load('ridge_model_NEWEST.pkl')
 loaded_model2 = joblib.load('ridge_model_2.pkl')
 
 
@@ -280,10 +280,12 @@ loaded_model2 = joblib.load('ridge_model_2.pkl')
 def index(request):
     context = {}
     processed_csv = ''  
+    user_input_text = ''  
 
     if request.method == 'POST':
         file = request.FILES.get('file_to_upload')
         user_input_text = request.POST.get('commentarea', '')
+    
 
         if file:
             file_name = file.name
@@ -298,8 +300,9 @@ def index(request):
                     input_text = txt_file.read()
 
                 input_text_tfidf = tfidf_vectorizer.transform([input_text])
+                print(f'текст из файла{input_text_tfidf}')
 
-                # Предсказание категории и рейтинга
+                
                 predicted_category = loaded_model.predict(input_text_tfidf)
                 predicted_rating = loaded_model2.predict(input_text_tfidf)
 
@@ -346,11 +349,43 @@ def index(request):
                 
                 
 
-            elif user_input_text:
-                # Если текст введен вручную, обработайте его и создайте CSV
-                processed_csv = process_text_to_csv(user_input_text)
+        if user_input_text:
 
-            context['csv_data'] = processed_csv
+            input_text_tfidf = tfidf_vectorizer.transform([user_input_text])
+            print(f'текст ручной{input_text_tfidf}')
+                
+            predicted_category = loaded_model.predict(input_text_tfidf)
+            predicted_rating = loaded_model2.predict(input_text_tfidf)
+
+
+            processed_csv = process_text_to_csv(input_text)
+
+            from bs4 import BeautifulSoup
+
+
+            soup = BeautifulSoup(processed_csv, 'html.parser')
+            red_word_count = len(soup.find_all('span', style='color: red;'))
+            print(red_word_count)
+
+            if red_word_count > 4:
+                predicted_rating[0] = 'C'
+                predicted_category[0] = 'C'
+                
+
+            if predicted_rating[0] in rating_to_category_mapping:
+                predicted_category[0] = rating_to_category_mapping[predicted_rating[0]]
+
+
+            context['predicted_category'] = predicted_category[0]
+            context['predicted_rating'] = predicted_rating[0]
+
+            if (predicted_category[0] == 'A' and predicted_rating[0] == 'AAA') or (predicted_category[0] == 'AAA' and predicted_rating[0] == 'A'):
+                context['predicted_category'] = 'AA'
+                context['predicted_rating'] = 'AA'
+
+
+
+        context['csv_data'] = processed_csv
 
     return render(request, 'website/index.html', context)
 
